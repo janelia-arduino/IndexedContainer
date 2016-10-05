@@ -15,7 +15,7 @@
 #include "Array.h"
 
 
-template <typename T, int max_size_>
+template <typename T, int MAX_SIZE>
 class IndexedContainer
 {
 public:
@@ -32,8 +32,8 @@ public:
   bool full();
 
 private:
-  Array<T,max_size_> values_;
-  Array<bool,max_size_> available_;
+  Array<T,MAX_SIZE> values_;
+  Array<bool,MAX_SIZE> available_;
   int size_;
 };
 #include "IndexedContainerDefinitions.h"

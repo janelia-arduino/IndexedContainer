@@ -9,14 +9,14 @@
 #define INDEXED_CONTAINER_DEFINITIONS_H
 
 
-template <typename T, int max_size_>
-IndexedContainer<T,max_size_>::IndexedContainer()
+template <typename T, int MAX_SIZE>
+IndexedContainer<T,MAX_SIZE>::IndexedContainer()
 {
   clear();
 }
 
-template <typename T, int max_size_>
-T& IndexedContainer<T, max_size_>::operator[](const int index)
+template <typename T, int MAX_SIZE>
+T& IndexedContainer<T, MAX_SIZE>::operator[](const int index)
 {
   if ((index >= 0) && !available_[index])
   {
@@ -24,8 +24,8 @@ T& IndexedContainer<T, max_size_>::operator[](const int index)
   }
 }
 
-template <typename T, int max_size_>
-T& IndexedContainer<T, max_size_>::at(const int index)
+template <typename T, int MAX_SIZE>
+T& IndexedContainer<T, MAX_SIZE>::at(const int index)
 {
   if ((index >= 0) && !available_[index])
   {
@@ -33,24 +33,24 @@ T& IndexedContainer<T, max_size_>::at(const int index)
   }
 }
 
-template <typename T, int max_size_>
-void IndexedContainer<T, max_size_>::clear()
+template <typename T, int MAX_SIZE>
+void IndexedContainer<T, MAX_SIZE>::clear()
 {
   size_ = 0;
-  for (int index=0; index<max_size_; ++index)
+  for (int index=0; index<MAX_SIZE; ++index)
   {
     available_[index] = true;
   }
 }
 
-template <typename T, int max_size_>
-int IndexedContainer<T, max_size_>::add(const T &value)
+template <typename T, int MAX_SIZE>
+int IndexedContainer<T, MAX_SIZE>::add(const T &value)
 {
-  if (size_ < max_size_)
+  if (size_ < MAX_SIZE)
   {
     bool found_available = false;
     int index = -1;
-    while (!found_available && (++index < max_size_))
+    while (!found_available && (++index < MAX_SIZE))
     {
       found_available = available_[index];
     }
@@ -65,8 +65,8 @@ int IndexedContainer<T, max_size_>::add(const T &value)
   return -1;
 }
 
-template <typename T, int max_size_>
-void IndexedContainer<T, max_size_>::remove(const int index)
+template <typename T, int MAX_SIZE>
+void IndexedContainer<T, MAX_SIZE>::remove(const int index)
 {
   if ((index >= 0) && (!available_[index]))
   {
@@ -75,8 +75,8 @@ void IndexedContainer<T, max_size_>::remove(const int index)
   }
 }
 
-template <typename T, int max_size_>
-bool IndexedContainer<T, max_size_>::indexHasValue(const int index)
+template <typename T, int MAX_SIZE>
+bool IndexedContainer<T, MAX_SIZE>::indexHasValue(const int index)
 {
   if (index < 0)
   {
@@ -85,28 +85,28 @@ bool IndexedContainer<T, max_size_>::indexHasValue(const int index)
   return !available_[index];
 }
 
-template <typename T, int max_size_>
-int IndexedContainer<T, max_size_>::size()
+template <typename T, int MAX_SIZE>
+int IndexedContainer<T, MAX_SIZE>::size()
 {
   return size_;
 }
 
-template <typename T, int max_size_>
-int IndexedContainer<T, max_size_>::max_size()
+template <typename T, int MAX_SIZE>
+int IndexedContainer<T, MAX_SIZE>::max_size()
 {
-  return max_size_;
+  return MAX_SIZE;
 }
 
-template <typename T, int max_size_>
-bool IndexedContainer<T, max_size_>::empty()
+template <typename T, int MAX_SIZE>
+bool IndexedContainer<T, MAX_SIZE>::empty()
 {
   return size_ == 0;
 }
 
-template <typename T, int max_size_>
-bool IndexedContainer<T, max_size_>::full()
+template <typename T, int MAX_SIZE>
+bool IndexedContainer<T, MAX_SIZE>::full()
 {
-  return size_ == max_size_;
+  return size_ == MAX_SIZE;
 }
 
 #endif
