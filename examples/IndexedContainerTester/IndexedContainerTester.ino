@@ -77,6 +77,11 @@ void setup()
   Serial << "indexed_container.remove(" << index << ") :" << endl;
   printIndexedContainer(indexed_container);
 
+  index = -1;
+  indexed_container.remove(index);
+  Serial << "indexed_container.remove(" << index << ") :" << endl;
+  printIndexedContainer(indexed_container);
+
 }
 
 

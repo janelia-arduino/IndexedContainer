@@ -20,8 +20,8 @@ class IndexedContainer
 {
 public:
   IndexedContainer();
-  T& operator[](const int i);
-  T& at(const int i);
+  T& operator[](const int index);
+  T& at(const int index);
   void clear();
   int add(const T &value);
   void remove(const int index);

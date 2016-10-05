@@ -16,20 +16,20 @@ IndexedContainer<T,max_size_>::IndexedContainer()
 }
 
 template <typename T, int max_size_>
-T& IndexedContainer<T, max_size_>::operator[](const int i)
+T& IndexedContainer<T, max_size_>::operator[](const int index)
 {
-  if ((i >= 0) && !available_[i])
+  if ((index >= 0) && !available_[index])
   {
-    return values_[i];
+    return values_[index];
   }
 }
 
 template <typename T, int max_size_>
-T& IndexedContainer<T, max_size_>::at(const int i)
+T& IndexedContainer<T, max_size_>::at(const int index)
 {
-  if ((i >= 0) && !available_[i])
+  if ((index >= 0) && !available_[index])
   {
-    return values_.at(i);
+    return values_.at(index);
   }
 }
 
@@ -37,9 +37,9 @@ template <typename T, int max_size_>
 void IndexedContainer<T, max_size_>::clear()
 {
   size_ = 0;
-  for (int i=0;i<max_size_;++i)
+  for (int index=0; index<max_size_; ++index)
   {
-    available_[i] = true;
+    available_[index] = true;
   }
 }
 
@@ -68,7 +68,7 @@ int IndexedContainer<T, max_size_>::add(const T &value)
 template <typename T, int max_size_>
 void IndexedContainer<T, max_size_>::remove(const int index)
 {
-  if (!available_[index])
+  if ((index >= 0) && (!available_[index]))
   {
     available_[index] = true;
     --size_;
@@ -78,6 +78,10 @@ void IndexedContainer<T, max_size_>::remove(const int index)
 template <typename T, int max_size_>
 bool IndexedContainer<T, max_size_>::indexHasValue(const int index)
 {
+  if (index < 0)
+  {
+    return false;
+  }
   return !available_[index];
 }
 
