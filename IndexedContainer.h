@@ -12,7 +12,6 @@
 #else
 #include "WProgram.h"
 #endif
-#include "Array.h"
 
 
 template <typename T, int MAX_SIZE>
@@ -24,7 +23,7 @@ public:
   T& at(const int index);
   void clear();
   int add(const T &value);
-  void remove(const int index);
+  bool remove(const int index);
   bool indexHasValue(const int index);
   int size();
   int max_size();
@@ -32,8 +31,8 @@ public:
   bool full();
 
 private:
-  Array<T,MAX_SIZE> values_;
-  Array<bool,MAX_SIZE> available_;
+  T values_[MAX_SIZE];
+  bool available_[MAX_SIZE];
   int size_;
 };
 #include "IndexedContainerDefinitions.h"
