@@ -22,6 +22,7 @@ T& IndexedContainer<T, MAX_SIZE>::operator[](const int index)
   {
     return values_[index];
   }
+  return values_[0]; // bad reference
 }
 
 template <typename T, size_t MAX_SIZE>
@@ -31,6 +32,7 @@ T& IndexedContainer<T, MAX_SIZE>::at(const int index)
   {
     return values_.at(index);
   }
+  return values_[0]; // bad reference
 }
 
 template <typename T, size_t MAX_SIZE>
