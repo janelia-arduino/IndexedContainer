@@ -7,11 +7,7 @@
 // ----------------------------------------------------------------------------
 #ifndef INDEXED_CONTAINER_H
 #define INDEXED_CONTAINER_H
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 
 
 template <typename T, size_t MAX_SIZE>
@@ -35,6 +31,6 @@ private:
   bool available_[MAX_SIZE];
   size_t size_;
 };
-#include "IndexedContainerDefinitions.h"
+#include "IndexedContainer/IndexedContainerDefinitions.h"
 
 #endif
