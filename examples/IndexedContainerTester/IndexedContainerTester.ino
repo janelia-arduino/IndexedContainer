@@ -4,7 +4,7 @@
 #include <IndexedContainer.h>
 
 
-const long BAUDRATE = 115200;
+const long BAUD = 115200;
 
 const int ELEMENT_COUNT_MAX = 5;
 
@@ -31,7 +31,7 @@ void printIndexedContainer(IndexedContainer<IndexedContainerType,ELEMENT_COUNT_M
 
 void setup()
 {
-  Serial.begin(BAUDRATE);
+  Serial.begin(BAUD);
   delay(1000);
 
   Serial << "ELEMENT_COUNT_MAX :" << endl;
