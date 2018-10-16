@@ -10,17 +10,18 @@
 #include <Arduino.h>
 
 
-template <typename T, size_t MAX_SIZE>
+template <typename T,
+  size_t MAX_SIZE>
 class IndexedContainer
 {
 public:
   IndexedContainer();
-  T& operator[](const int index);
-  T& at(const int index);
+  T& operator[](int index);
+  T& at(int index);
   void clear();
   int add(const T &value);
-  bool remove(const int index);
-  bool indexHasValue(const int index);
+  bool remove(int index);
+  bool indexHasValue(int index);
   size_t size();
   size_t max_size();
   bool empty();
