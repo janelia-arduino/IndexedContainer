@@ -18,7 +18,7 @@ IndexedContainer<T,MAX_SIZE>::IndexedContainer()
 
 template <typename T,
   size_t MAX_SIZE>
-T& IndexedContainer<T,MAX_SIZE>::operator[](int index)
+const T & IndexedContainer<T,MAX_SIZE>::operator[](int index) const
 {
   if ((index >= 0) && (index < (int)MAX_SIZE) && !available_[index])
   {
@@ -29,7 +29,29 @@ T& IndexedContainer<T,MAX_SIZE>::operator[](int index)
 
 template <typename T,
   size_t MAX_SIZE>
-T& IndexedContainer<T,MAX_SIZE>::at(int index)
+T & IndexedContainer<T,MAX_SIZE>::operator[](int index)
+{
+  if ((index >= 0) && (index < (int)MAX_SIZE) && !available_[index])
+  {
+    return values_[index];
+  }
+  return values_[0]; // bad reference
+}
+
+template <typename T,
+  size_t MAX_SIZE>
+const T & IndexedContainer<T,MAX_SIZE>::at(int index) const
+{
+  if ((index >= 0) && (index < MAX_SIZE) && !available_[index])
+  {
+    return values_.at(index);
+  }
+  return values_[0]; // bad reference
+}
+
+template <typename T,
+  size_t MAX_SIZE>
+T & IndexedContainer<T,MAX_SIZE>::at(int index)
 {
   if ((index >= 0) && (index < MAX_SIZE) && !available_[index])
   {
