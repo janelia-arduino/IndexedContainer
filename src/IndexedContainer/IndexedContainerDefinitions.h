@@ -42,9 +42,9 @@ template <typename T,
   size_t MAX_SIZE>
 const T & IndexedContainer<T,MAX_SIZE>::at(int index) const
 {
-  if ((index >= 0) && (index < MAX_SIZE) && !available_[index])
+  if ((index >= 0) && (index < (int)MAX_SIZE) && !available_[index])
   {
-    return values_.at(index);
+    return values_[index];
   }
   return values_[0]; // bad reference
 }
@@ -53,9 +53,9 @@ template <typename T,
   size_t MAX_SIZE>
 T & IndexedContainer<T,MAX_SIZE>::at(int index)
 {
-  if ((index >= 0) && (index < MAX_SIZE) && !available_[index])
+  if ((index >= 0) && (index < (int)MAX_SIZE) && !available_[index])
   {
-    return values_.at(index);
+    return values_[index];
   }
   return values_[0]; // bad reference
 }
@@ -146,4 +146,50 @@ bool IndexedContainer<T,MAX_SIZE>::full()
   return size_ == MAX_SIZE;
 }
 
+template <typename T,
+  size_t MAX_SIZE>
+typename IndexedContainer<T,MAX_SIZE>::iterator IndexedContainer<T,MAX_SIZE>::begin()
+{
+  return iterator(this);
+}
+
+template <typename T,
+  size_t MAX_SIZE>
+typename IndexedContainer<T,MAX_SIZE>::iterator IndexedContainer<T,MAX_SIZE>::end()
+{
+  return iterator(this,MAX_SIZE);
+}
+
+template <typename T,
+  size_t MAX_SIZE>
+IndexedContainerIterator<T,MAX_SIZE> & IndexedContainerIterator<T,MAX_SIZE>::operator++()
+{
+  while (true)
+  {
+    ++position_;
+    if ((position_ == MAX_SIZE) || (ic_ptr_->indexHasValue(position_)))
+    {
+      break;
+    }
+  }
+  return *this;
+}
+
+template <typename T,
+  size_t MAX_SIZE>
+T & IndexedContainerIterator<T,MAX_SIZE>::operator*()
+{
+  while (true)
+  {
+    if (ic_ptr_->indexHasValue(position_))
+    {
+      return ic_ptr_->at(position_);
+    }
+    ++position_;
+    if (position_ == MAX_SIZE)
+    {
+      return dummy_;
+    }
+  }
+}
 #endif

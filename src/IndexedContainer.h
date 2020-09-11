@@ -8,6 +8,7 @@
 #ifndef INDEXED_CONTAINER_H
 #define INDEXED_CONTAINER_H
 #include <Arduino.h>
+#include "IndexedContainer/IndexedContainerIterator.h"
 
 
 template <typename T,
@@ -28,6 +29,9 @@ public:
   size_t max_size();
   bool empty();
   bool full();
+  typedef IndexedContainerIterator<T,MAX_SIZE> iterator;
+  iterator begin();
+  iterator end();
 
 private:
   T values_[MAX_SIZE];
